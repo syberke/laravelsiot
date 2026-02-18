@@ -24,4 +24,36 @@ class SensorController extends Controller
 
         return redirect()->back()->with('success', 'Data sensor berhasil ditambahkan');
     }
+
+
+
+    public function edit($id)
+    {
+    
+        $sensor = Sensor::findOrFail($id);
+        return view('sensor.edit', compact('sensor'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_sensor' => 'required',
+            'data' => 'required|numeric'
+        ]);
+
+        $sensor = Sensor::findOrFail($id);
+        $sensor->update($request->all());
+
+        return redirect()->route('sensor.index')->with('success', 'Data sensor berhasil diperbarui');
+    }
+
+
+
+    public function destroy($id)
+    {
+        $sensor = Sensor::findOrFail($id);
+        $sensor->delete();
+
+        return redirect()->back()->with('success', 'Data sensor berhasil dihapus');
+    }
 }
