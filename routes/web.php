@@ -7,12 +7,15 @@
     use App\Http\Controllers\QueryContoller;
     use App\Http\Controllers\PostContoller;
 use App\Http\Controllers\SensorController;
+use App\Http\Controllers\DeviceController;
 
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
-Route::resource('sensor', SensorController::class);
+Route::resource('sensor',SensorController::class);
+Route::resource('device',DeviceController::class);
 
-
-Route::get('/', [SensorController::class, 'index']);
 
 
 

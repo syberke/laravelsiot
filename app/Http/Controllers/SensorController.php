@@ -17,7 +17,8 @@ class SensorController extends Controller
     {
         $request->validate([
             'nama_sensor' => 'required',
-            'data' => 'required|numeric'
+            'data' => 'required|numeric',
+            'status' => 'required|integer' 
         ]);
 
         Sensor::create($request->all());
@@ -25,20 +26,19 @@ class SensorController extends Controller
         return redirect()->back()->with('success', 'Data sensor berhasil ditambahkan');
     }
 
-
-
     public function edit($id)
     {
-    
         $sensor = Sensor::findOrFail($id);
         return view('sensor.edit', compact('sensor'));
     }
 
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'nama_sensor' => 'required',
-            'data' => 'required|numeric'
+            'data' => 'required|numeric',
+            'status' => 'required|integer'
         ]);
 
         $sensor = Sensor::findOrFail($id);
@@ -46,8 +46,6 @@ class SensorController extends Controller
 
         return redirect()->route('sensor.index')->with('success', 'Data sensor berhasil diperbarui');
     }
-
-
 
     public function destroy($id)
     {
