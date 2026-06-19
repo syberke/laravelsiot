@@ -28,9 +28,6 @@ class WebhookController extends Controller
            
             $targetSerialNumber = 123456; 
 
-            /* ==========================================================
-               A. SIMPAN KE TABEL RIWAYAT LOG (sensor_logs)
-               ========================================================== */
             $latestLog = SensorLog::latest()->first();
 
           
@@ -49,9 +46,6 @@ class WebhookController extends Controller
                 ]);
             }
 
-            /* ==========================================================
-               B. UPDATE NILAI DI TABEL MANAGEMENT UTAMA (sensors)
-               ========================================================== */
             if ($tipeSensor == 'suhu') {
                 $sensorData = Sensor::where('nama_sensor', 'LIKE', '%Suhu%')->first();
                 if ($sensorData) {
